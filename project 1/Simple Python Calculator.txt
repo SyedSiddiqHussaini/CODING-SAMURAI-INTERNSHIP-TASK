@@ -1,0 +1,41 @@
+# Simple Python Calculator 🧮
+
+This project is a Simple Calculator application built using Python as part of my Python Development Internship.  
+The goal of this project was to strengthen my understanding of Python basics, logical conditions, and user input handling through a practical, hands-on task.
+
+## 🔹 Project Overview
+
+The calculator performs basic arithmetic operations through a command-line interface (CLI).  
+It allows users to enter numbers, select operations, and view results in real time.
+
+This project helped me apply programming concepts in a real-world style task and improve my problem-solving approach.
+
+## 🔹 Features
+
+- Addition  
+- Subtraction  
+- Multiplication  
+- Division  
+- User-friendly command-line interaction  
+- Input validation for basic error handling  
+
+## 🔹 Technologies Used
+
+- Python  
+- Command Line Interface (CLI)  
+
+## 🔹 What I Learned
+
+Through this project, I learned how to:
+
+- Work with user inputs in Python  
+- Apply conditional statements for logic flow  
+- Structure small Python programs cleanly  
+- Debug and test simple applications  
+- Understand how basic applications are designed and executed  
+
+## 🔹 How to Run the Project
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-link>
