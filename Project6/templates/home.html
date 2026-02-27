@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="text-center mb-5">
+            <h1 class="display-3 fw-bold">SSH BLOGS</h1>
+            <p class="lead text-muted">A Journey through Data Analytics & Professional Growth</p>
+        </div>
+
+        {% for post in posts %}
+        <div class="card shadow-sm mb-4 p-4">
+            <h2 class="h3">{{ post.title }}</h2>
+            <p class="text-muted small">Written by {{ post.author.username }}</p>
+            <div class="mb-3">
+                {{ post.content|striptags|truncate(180) }}
+            </div>
+            <a href="{{ url_for('view_post', post_id=post.id) }}" class="fw-bold text-info text-decoration-none">READ FULL ARTICLE →</a>
+        </div>
+        {% endfor %}
+
+        <hr class="my-5">
+        
+        <h3 class="text-center mb-4">What Readers Say</h3>
+        {% for fb in feedbacks %}
+        <div class="p-3 mb-2 bg-white rounded shadow-sm border-start border-4 border-info">
+            <p class="mb-0"><strong>{{ fb.name }}:</strong> <em>"{{ fb.message }}"</em></p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
