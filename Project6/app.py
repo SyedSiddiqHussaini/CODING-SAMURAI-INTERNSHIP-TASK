@@ -1,15 +1,16 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+import os
+from flask import Flask, render_template, redirect, url_for, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'ssh-blogs-secret-2026'
+app.config['SECRET_KEY'] = 'ssh-blogs-personal-project-2026'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ssh_blog.db'
 
 db = SQLAlchemy(app)
 
-# --- DATABASE MODELS ---
+# --- MODELS ---
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
@@ -27,7 +28,6 @@ class Feedback(db.Model):
     name = db.Column(db.String(100), nullable=False)
     message = db.Column(db.Text, nullable=False)
 
-# --- LOGIN CONFIG ---
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
@@ -36,7 +36,6 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Initialize Database for Flask 3.0+
 with app.app_context():
     db.create_all()
 
@@ -49,7 +48,6 @@ def home():
     all_feedback = Feedback.query.all()
     return render_template('home.html', posts=all_posts, feedbacks=all_feedback)
 
-# FIXED: Ensure post_id matches the HTML call to fix BuildError
 @app.route('/post/<int:post_id>')
 def view_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -58,6 +56,12 @@ def view_post(post_id):
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+# NEW: Route to download your Resume
+@app.route('/download_resume')
+def download_resume():
+    # Place your resume file (e.g., resume.pdf) inside a folder named 'static'
+    return send_from_directory(directory='static', path='resume.pdf')
 
 @app.route('/submit_feedback', methods=['POST'])
 def submit_feedback():
@@ -94,6 +98,12 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html')
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+# CRUD Operations (Create, Edit, Delete)
 @app.route('/create', methods=['GET', 'POST'])
 @login_required
 def create_post():
@@ -125,11 +135,6 @@ def delete_post(id):
         db.session.delete(post)
         db.session.commit()
     return redirect(url_for('my_account'))
-
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
