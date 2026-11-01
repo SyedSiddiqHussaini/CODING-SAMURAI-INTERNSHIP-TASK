@@ -1,0 +1,44 @@
+# Project 03: Weather App Using API 🌦️
+
+## Overview
+
+This project is a Weather Application built using Python that fetches real-time weather data using an external API.
+
+Users can enter a city name, and the application returns:
+
+- Temperature
+- Weather condition
+- Humidity
+- Wind speed
+
+## Technologies Used
+
+- Python
+- REST API
+- API Key Authentication
+- JSON Data Handling
+
+## Features
+
+- Real-time weather data retrieval
+- Secure API key usage
+- Input validation
+- Error handling for invalid city names
+
+## How It Works
+
+1. User enters a city name.
+2. The application sends a request to the weather API.
+3. API responds with JSON data.
+4. The program extracts and displays relevant weather details.
+
+## Learning Outcomes
+
+- Understanding API integration
+- Working with HTTP requests in Python
+- Handling JSON responses
+- Implementing error handling in applications
+
+## Internship Context
+
+This project was completed as part of my Python Development Internship to demonstrate API integration and real-world application building.
